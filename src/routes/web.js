@@ -6,12 +6,9 @@ import homeController from '../controllers/HomeController'
 let router = express.Router();
 
 let initWebRoute = (app) =>{
-    router.get("/", (req, res)=>{
-        return homeController.getHomePage(req, res);
-    })
-
-    router.post("/webhook", (req, res) => homeController.postWebhook(req, res));
-    router.get("/webhook", (req, res) => homeController.getWebhook(req,res));
+    router.get("/", homeController.getHomePage)
+    router.post("/webhook",  homeController.postWebhook);
+    router.get("/webhook", homeController.getWebhook);
     return app.use('/', router);
 }
 

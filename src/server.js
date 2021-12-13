@@ -4,6 +4,9 @@ import viewEngine from "./configs/viewEngine"
 import webRoute from  "./routes/web"
 require('dotenv').config()
 
+const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+const VERIFY_TOKEN = process.env.VERIFY_TOKEN;
+
 
 let app = express();
 app.use(bodyParser.json());
