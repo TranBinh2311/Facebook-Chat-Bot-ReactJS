@@ -6,7 +6,8 @@ require('dotenv').config()
 
 
 let app = express();
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 //config view engine
 viewEngine(app);
@@ -15,8 +16,7 @@ viewEngine(app);
 //config wrb route
 webRoute(app);
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+
 let port = process.env.PORT || 8080;
 
 
