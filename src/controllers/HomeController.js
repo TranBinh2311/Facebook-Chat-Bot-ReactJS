@@ -1,4 +1,5 @@
 require('dotenv').config();
+import { set } from "express/lib/application";
 import request from "request"
 import chatbotService from "../services/ChatbotService";
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
@@ -130,7 +131,8 @@ async function handlePostback(sender_psid, received_postback) {
     case "no":
       response = { "text": "Oops, try sending another image." }
       break;
-    case "GET_STARTED":
+    case "RESTART_BOT":
+    case "GET_STARTED" :
       await chatbotService.handleGetStarted(sender_psid);
       break;
     default:
@@ -166,8 +168,6 @@ function callSendAPI(sender_psid, response) {
 /*------------------------------------------------------------------------------------------ */
 
 let setUpProfile = async (req, res)=>{
-  
-
   // call profile facebook profile
   let request_body = {
           "get_started": {"payload":"GET_STARTED"},
@@ -175,7 +175,6 @@ let setUpProfile = async (req, res)=>{
              "https://app-chat-bot-7.herokuapp.com/"
            ]      
   }
- 
   //template string
   // Send the HTTP request to the Messenger Platform
   await request({
@@ -194,9 +193,58 @@ let setUpProfile = async (req, res)=>{
   }); 
   return res.send("Setup Profile Succeeds")
 }
+
+let setUpPersistentMenu =  async (req, res) =>{
+// call profile facebook profile
+    let request_body = {
+        "persistent_menu": [
+          {
+              "locale": "default",
+              "composer_input_disabled": false,
+              "call_to_actions": [
+                  {
+                      "type": "web_url",
+                      "title": "BOSS FACEBOOK",
+                      "url": "https://www.facebook.com/Robert-104556582086483",
+                      "webview_height_ratio": "full"
+                  },
+                  {
+                      "type": "web_url",
+                      "title": "FACEBOOK PAGE",
+                      "url": "https://www.facebook.com/Robert-104556582086483",
+                      "webview_height_ratio": "full"
+                  },
+                  {
+                      "type": "postback",
+                      "title": "Khởi động lại bot",
+                      "payload": "RESTART_BOT",   
+                  }
+              ]
+          }
+      ]
+    }
+    //template string
+    // Send the HTTP request to the Messenger Platform
+    await request({
+    "uri": `https://graph.facebook.com/v12.0/me/messenger_profile?access_token=${PAGE_ACCESS_TOKEN}`,
+    "qs": { "access_token": PAGE_ACCESS_TOKEN },
+    "method": "POST",
+    "json": request_body
+    }, (err, res, body) => {
+    console.log(body);
+    if (!err) {
+    console.log('Setup persistent Succeeds ');
+
+    } else {
+    console.error("Unable to Setup:" + err);
+    }
+    }); 
+    return res.send("Setup persistent Succeeds ")
+}
 module.exports = {
     getHomePage: getHomePage,
     postWebhook:  postWebhook,
     getWebhook: getWebhook,
-    setUpProfile: setUpProfile
+    setUpProfile: setUpProfile,
+    setUpPersistentMenu: setUpPersistentMenu
 }
