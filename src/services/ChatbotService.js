@@ -26,10 +26,35 @@ let callSendAPI = (sender_psid, response) =>{
     }
   }); 
 }
+let getUsername = (sender_psid) => {
+    // Send the HTTP request to the Messenger Platform
+      return new Promise((resolve, reject)=>{
+        request({
+            "uri": `https://graph.facebook.com/${sender_psid}?fields=first_name,last_name,profile_pic&access_token=${PAGE_ACCESS_TOKEN}`,
+            "qs": { "access_token": PAGE_ACCESS_TOKEN  },
+            "method": "POST",
+            "json": request_body
+          }, (err, res, body) => {
+            if (!err) {
+                // "first_name": "Peter",
+                // "last_name": "Chang",
+                body = JSON.parse(body);
+                let username = `${body.first_name} ${body.last_name}`;
+                resolve(username);
+            } else {
+              console.error("Unable to send message:" + err);
+              reject(err);
+            }
+          }); 
+          return username;
+      })
+      
+}
 let handleGetStarted = (sender_psid) =>{
     return new Promise(async(resolve, reject)=>{
         try{
-            let response = { "text":"Chào mừng bạn đến với web bán hàng của tôi" }
+            let username = await getUsername(sender_psid);
+            let response = { "text":`Chào mừng ${username} đến với web B-Shop của tôi` }
             await callSendAPI(sender_psid,response);
             resolve('done');
         }catch(error){
@@ -40,5 +65,6 @@ let handleGetStarted = (sender_psid) =>{
 
 export default {
     handleGetStarted: handleGetStarted,
-    callSendAPI: callSendAPI
+    callSendAPI: callSendAPI,
+    getUsername: getUsername
 }
