@@ -2,7 +2,7 @@ require('dotenv').config();
 
 import request from "request"
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
-
+const IMAGE_GET_STARTED = 'https://xshopapp.herokuapp.com/images/phone.jpg';
 let callSendAPI = (sender_psid, response) =>{
      // Construct the message body
   let request_body = {
@@ -51,17 +51,55 @@ let handleGetStarted = (sender_psid) =>{
     return new Promise(async(resolve, reject)=>{
         try{
             let username = await getUsername(sender_psid);
-            let response = { "text":`Chào mừng ${username} đến với web B-Shop của tôi` }
-            await callSendAPI(sender_psid,response);
+            let response1 = { "text":`Chào mừng ${username} đến với web B-Shop của tôi` }
+            let response2 = sendGetStartedTemplate();
+            //send text message
+            await callSendAPI(sender_psid,response1);
+            //send generic template message
+            await callSendAPI(sender_psid,response2);
             resolve('done');
         }catch(error){
             reject(error)
         }
     })
 }
+let sendGetStartedTemplate = () =>{
+  let response = {
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "generic",
+        "elements": [{
+          "title": "Xin chào bạn đến với shop của chúng tôi",
+          "subtitle": "Dứoi đây là một vài mẫu thịnh hành",
+          "image_url": IMAGE_GET_STARTED,
+          "buttons": [
+            {
+              "type": "postback",
+              "title": "XEM THÊM",
+              "payload": "SHOW_MORE",
+            },
+            {
+              "type": "postback",
+              "title": "ĐẶT MUA",
+              "payload": "ORDER",
+            },
+            {
+              "type": "postback",
+              "title": "KHUYẾN MÃI",
+              "payload": "DISCOUNT",
+            },
+          ],
+        }]
+      }
+    }
+  }
 
+  return response;
+}
 export default {
     handleGetStarted: handleGetStarted,
     callSendAPI: callSendAPI,
-    getUsername: getUsername
+    getUsername: getUsername,
+    sendGetStartedTemplate: sendGetStartedTemplate
 }
