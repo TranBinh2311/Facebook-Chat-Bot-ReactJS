@@ -128,7 +128,7 @@ function handlePostback(sender_psid, received_postback) {
     response = { "text": "Oops, try sending another image." }
   }
   else if(payload === 'GET_STARTED') {
-    response = { "text":"Chao mung ban den voi trang cua toi" }
+    response = { "text":"Chào mừng bạn đến với web bán hàng của tôi" }
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
