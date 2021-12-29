@@ -138,6 +138,12 @@ async function handlePostback(sender_psid, received_postback) {
     case "MAIN_PRODUCT":
       await chatbotService.handleSendMainproduct(sender_psid);
       break;
+    case "TOP_SALE_PRODUCT":
+      await chatbotService.handleSendTopSaleProduct(sender_psid);
+      break;
+    case "TOP_RATE_PRODUCT":
+      await chatbotService.handleSendTopRateProduct(sender_psid);
+      break;
     default:
       response = { "text":`Opp!! I dont know response with your message : ${payload}`}
   }

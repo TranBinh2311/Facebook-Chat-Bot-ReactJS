@@ -84,7 +84,6 @@ let sendGetStartedTemplate = () =>{
 
   return response;
 }
-
 let getMainMenuTemplate = () =>{
   let response = {
     "attachment": {
@@ -147,6 +146,100 @@ let getMainMenuTemplate = () =>{
 };
 // ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
+let getTopRateTemplate = () =>{
+  let response = {
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "generic",
+        "elements": [
+          {
+          "title": "Airpods Wireless Bluetooth Headphones",
+          "subtitle": "Chúng tôi hân hạnh mang đến cho bạn các sản phẩm với chất lượng tốt nhất",
+          "image_url": IMAGE_MENU_1,
+          "buttons": 
+            {
+              "type": "postback",
+              "title": "XEM CHI TIẾT",
+              "payload": "VIEW_1",
+            },
+          },
+          {
+            "title": "Amazon Echo Dot 3rd Generation",
+            "subtitle": "Chúng tôi hân hạnh mang đến cho bạn các sản phẩm với chất lượng tốt nhất",
+            "image_url": IMAGE_MENU_2,
+            "buttons": 
+              {
+                "type": "postback",
+                "title": "XEM CHI TIẾT",
+                "payload": "VIEW_2",
+              }, 
+          },
+          {
+              "title": "Logitech G-Series Gaming Mouse",
+              "subtitle": "Số lượng kho của shop lên đến hàng nghìn sản phẩm. Quý khách có thể xem chi tiết tại đây",
+              "image_url": IMAGE_MENU_3,
+              "buttons": {
+                "type": "postback",
+                "title": "XEM CHI TIẾT",
+                "payload": "VIEW_3",
+              },
+          },
+        ]
+      }
+    }
+  }
+
+  return response;
+};
+let getTopSaleTemplate = () =>{
+  let response = {
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "generic",
+        "elements": [
+          {
+          "title": "Airpods Wireless Bluetooth Headphones",
+          "subtitle": "Chúng tôi hân hạnh mang đến cho bạn các sản phẩm với chất lượng tốt nhất",
+          "image_url": IMAGE_MENU_1,
+          "buttons": 
+            {
+              "type": "postback",
+              "title": "XEM CHI TIẾT",
+              "payload": "VIEW_1",
+            },
+          },
+          {
+            "title": "Amazon Echo Dot 3rd Generation",
+            "subtitle": "Chúng tôi hân hạnh mang đến cho bạn các sản phẩm với chất lượng tốt nhất",
+            "image_url": IMAGE_MENU_2,
+            "buttons": 
+              {
+                "type": "postback",
+                "title": "XEM CHI TIẾT",
+                "payload": "VIEW_2",
+              }, 
+          },
+          {
+              "title": "Logitech G-Series Gaming Mouse",
+              "subtitle": "Số lượng kho của shop lên đến hàng nghìn sản phẩm. Quý khách có thể xem chi tiết tại đây",
+              "image_url": IMAGE_MENU_3,
+              "buttons": {
+                "type": "postback",
+                "title": "XEM CHI TIẾT",
+                "payload": "VIEW_3",
+              },
+          },
+        ]
+      }
+    }
+  }
+
+  return response;
+};
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
 // ---------------------------------------------------------------------------
 let handleGetStarted = (sender_psid) =>{
     return new Promise(async(resolve, reject)=>{
@@ -176,11 +269,36 @@ let handleSendMainproduct = (sender_psid) => {
         }
     })
 }
+let handleSendTopRateProduct = () =>{
+  return new Promise(async(resolve, reject)=>{
+    try{
+        let response2 = getTopRateTemplate();
+        await callSendAPI(sender_psid,response2);
 
+        resolve('done');
+        }catch(error){
+            reject(error)
+        }
+    })
+}
+let handleSendTopSaleProduct = () =>{
+  return new Promise(async(resolve, reject)=>{
+    try{
+        let response2 = getTopSaleTemplate();
+        await callSendAPI(sender_psid,response2);
+
+        resolve('done');
+        }catch(error){
+            reject(error)
+        }
+    })
+}
 export default {
     handleGetStarted: handleGetStarted,
     callSendAPI: callSendAPI,
     getUsername: getUsername,
     sendGetStartedTemplate: sendGetStartedTemplate,
-    handleSendMainproduct: handleSendMainproduct
+    handleSendMainproduct: handleSendMainproduct,
+    handleSendTopSaleProduct: handleSendTopSaleProduct,
+    handleSendTopRateProduct: handleSendTopRateProduct
 }
