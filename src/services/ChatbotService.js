@@ -157,33 +157,36 @@ let getTopRateTemplate = () =>{
           "title": "Airpods Wireless Bluetooth Headphones",
           "subtitle": "Chúng tôi hân hạnh mang đến cho bạn các sản phẩm với chất lượng tốt nhất",
           "image_url": IMAGE_MENU_1,
-          "buttons": 
+          "buttons": [
             {
               "type": "postback",
               "title": "XEM CHI TIẾT",
               "payload": "VIEW_1",
             },
+          ],
           },
           {
             "title": "Amazon Echo Dot 3rd Generation",
             "subtitle": "Chúng tôi hân hạnh mang đến cho bạn các sản phẩm với chất lượng tốt nhất",
             "image_url": IMAGE_MENU_2,
-            "buttons": 
+            "buttons": [
               {
                 "type": "postback",
                 "title": "XEM CHI TIẾT",
                 "payload": "VIEW_2",
               }, 
+              ]
           },
           {
               "title": "Logitech G-Series Gaming Mouse",
               "subtitle": "Số lượng kho của shop lên đến hàng nghìn sản phẩm. Quý khách có thể xem chi tiết tại đây",
               "image_url": IMAGE_MENU_3,
-              "buttons": {
+              "buttons": [{
                 "type": "postback",
                 "title": "XEM CHI TIẾT",
                 "payload": "VIEW_3",
               },
+            ]
           },
         ]
       }
@@ -203,33 +206,36 @@ let getTopSaleTemplate = () =>{
           "title": "Airpods Wireless Bluetooth Headphones",
           "subtitle": "Chúng tôi hân hạnh mang đến cho bạn các sản phẩm với chất lượng tốt nhất",
           "image_url": IMAGE_MENU_1,
-          "buttons": 
+          "buttons": [
             {
               "type": "postback",
               "title": "XEM CHI TIẾT",
               "payload": "VIEW_1",
             },
+          ],
           },
           {
             "title": "Amazon Echo Dot 3rd Generation",
             "subtitle": "Chúng tôi hân hạnh mang đến cho bạn các sản phẩm với chất lượng tốt nhất",
             "image_url": IMAGE_MENU_2,
-            "buttons": 
+            "buttons": [
               {
                 "type": "postback",
                 "title": "XEM CHI TIẾT",
                 "payload": "VIEW_2",
               }, 
+              ]
           },
           {
               "title": "Logitech G-Series Gaming Mouse",
               "subtitle": "Số lượng kho của shop lên đến hàng nghìn sản phẩm. Quý khách có thể xem chi tiết tại đây",
               "image_url": IMAGE_MENU_3,
-              "buttons": {
+              "buttons": [{
                 "type": "postback",
                 "title": "XEM CHI TIẾT",
                 "payload": "VIEW_3",
               },
+            ]
           },
         ]
       }
