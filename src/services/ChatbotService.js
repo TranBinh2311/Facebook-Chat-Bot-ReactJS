@@ -3,6 +3,9 @@ require('dotenv').config();
 import request from "request"
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN
 const IMAGE_GET_STARTED = 'https://xshopapp.herokuapp.com/images/phone.jpg';
+const IMAGE_MENU_1 = "https://xshopapp.herokuapp.com/images/airpods.jpg"
+const IMAGE_MENU_2= "https://xshopapp.herokuapp.com/images/camera.jpg"
+const IMAGE_MENU_3 = "https://xshopapp.herokuapp.com/images/playstation.jpg"
 let callSendAPI = (sender_psid, response) =>{
      // Construct the message body
   let request_body = {
@@ -92,7 +95,7 @@ let getMainMenuTemplate = () =>{
           {
           "title": "Các sản phẩm chính của nhà hàng",
           "subtitle": "Chúng tôi hân hạnh mang đến cho bạn các sản phẩm với chất lượng tốt nhất",
-          "image_url": IMAGE_GET_STARTED,
+          "image_url": IMAGE_MENU_1,
           "buttons": [
             {
               "type": "postback",
@@ -114,7 +117,7 @@ let getMainMenuTemplate = () =>{
           {
             "title": "Bạn muốn đặt đồ?",
             "subtitle": "Đặt đồ nhanh gọn, thanh toán đơn giản, giao nhanh trong 2 ngày",
-            "image_url": IMAGE_GET_STARTED,
+            "image_url": IMAGE_MENU_2,
             "buttons": [
               {
                 "type": "postback",
@@ -126,7 +129,7 @@ let getMainMenuTemplate = () =>{
           {
               "title": "Xem chi tiết sản phẩm",
               "subtitle": "Số lượng kho của shop lên đến hàng nghìn sản phẩm. Quý khách có thể xem chi tiết tại đây",
-              "image_url": IMAGE_GET_STARTED,
+              "image_url": IMAGE_MENU_3,
               "buttons": [
                 {
                   "type": "postback",
