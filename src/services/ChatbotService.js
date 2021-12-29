@@ -47,22 +47,6 @@ let getUsername = (sender_psid) => {
       })
       
 }
-let handleGetStarted = (sender_psid) =>{
-    return new Promise(async(resolve, reject)=>{
-        try{
-            let username = await getUsername(sender_psid);
-            let response1 = { "text":`Chào mừng ${username} đến với web B-Shop của tôi` }
-            let response2 = sendGetStartedTemplate();
-            //send text message
-            await callSendAPI(sender_psid,response1);
-            //send generic template message
-            await callSendAPI(sender_psid,response2);
-            resolve('done');
-        }catch(error){
-            reject(error)
-        }
-    })
-}
 let sendGetStartedTemplate = () =>{
   let response = {
     "attachment": {
@@ -76,8 +60,8 @@ let sendGetStartedTemplate = () =>{
           "buttons": [
             {
               "type": "postback",
-              "title": "XEM THÊM",
-              "payload": "SHOW_MORE",
+              "title": "DANH SÁCH SẢN PHẨM",
+              "payload": "MAIN_PRODUCT",
             },
             {
               "type": "postback",
@@ -97,9 +81,103 @@ let sendGetStartedTemplate = () =>{
 
   return response;
 }
+
+let getMainMenuTemplate = () =>{
+  let response = {
+    "attachment": {
+      "type": "template",
+      "payload": {
+        "template_type": "generic",
+        "elements": [
+          {
+          "title": "Các sản phẩm chính của nhà hàng",
+          "subtitle": "Chúng tôi hân hạnh mang đến cho bạn các sản phẩm với chất lượng tốt nhất",
+          "image_url": IMAGE_GET_STARTED,
+          "buttons": [
+            {
+              "type": "postback",
+              "title": "SẢN PHẨM BÁN CHẠY NHẤT NGÀY",
+              "payload": "DAY_PRODUCT",
+            },
+            {
+              "type": "postback",
+              "title": "SẢN PHẨM BÁN CHẠY NHẤT TUẦN",
+              "payload": "WEEK_PRODUCT",
+            },
+            {
+              "type": "postback",
+              "title": "SẢN PHẨM BÁN CHẠY NHẤT THÁNG",
+              "payload": "MONTH_PRODUCT",
+            },
+          ],
+          },
+          {
+            "title": "Bạn muốn đặt đồ?",
+            "subtitle": "Đặt đồ nhanh gọn, thanh toán đơn giản, giao nhanh trong 2 ngày",
+            "image_url": IMAGE_GET_STARTED,
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "ĐẶT MUA",
+                "payload": "BUY_PRODUCT",
+              },  
+            ],
+          },
+          {
+              "title": "Xem chi tiết sản phẩm",
+              "subtitle": "Số lượng kho của shop lên đến hàng nghìn sản phẩm. Quý khách có thể xem chi tiết tại đây",
+              "image_url": IMAGE_GET_STARTED,
+              "buttons": [
+                {
+                  "type": "postback",
+                  "title": "CHI TIẾT",
+                  "payload": "DETAILS_PRODUCT",
+                },
+              ],
+          },
+        ]
+      }
+    }
+  }
+
+  return response;
+};
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+let handleGetStarted = (sender_psid) =>{
+    return new Promise(async(resolve, reject)=>{
+        try{
+            let username = await getUsername(sender_psid);
+            let response1 = { "text":`Chào mừng ${username} đến với web B-Shop của tôi` }
+            let response2 = sendGetStartedTemplate();
+            //send text message
+            await callSendAPI(sender_psid,response1);
+            //send generic template message
+            await callSendAPI(sender_psid,response2);
+            resolve('done');
+        }catch(error){
+            reject(error)
+        }
+    })
+}
+let handleSendMainproduct = (sender_psid) => {
+      return new Promise(async(resolve, reject)=>{
+        try{
+            let response2 = getMainMenuTemplate();
+            await callSendAPI(sender_psid,response2);
+
+            resolve('done');
+        }catch(error){
+            reject(error)
+        }
+    })
+}
+
 export default {
     handleGetStarted: handleGetStarted,
     callSendAPI: callSendAPI,
     getUsername: getUsername,
-    sendGetStartedTemplate: sendGetStartedTemplate
+    sendGetStartedTemplate: sendGetStartedTemplate,
+    handleSendMainproduct: handleSendMainproduct
 }

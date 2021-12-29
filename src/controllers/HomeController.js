@@ -135,6 +135,9 @@ async function handlePostback(sender_psid, received_postback) {
     case "GET_STARTED" :
       await chatbotService.handleGetStarted(sender_psid);
       break;
+    case "MAIN_PRODUCT":
+      await chatbotService.handleSendMainproduct(sender_psid);
+      break;
     default:
       response = { "text":`Opp!! I dont know response with your message : ${payload}`}
   }
@@ -204,19 +207,19 @@ let setUpPersistentMenu =  async (req, res) =>{
               "call_to_actions": [
                   {
                       "type": "web_url",
-                      "title": "BOSS FACEBOOK",
-                      "url": "https://www.facebook.com/Robert-104556582086483",
+                      "title": "Facebook của ông chủ",
+                      "url": "https://www.facebook.com/profile.php?id=100015374085386",
                       "webview_height_ratio": "full"
                   },
                   {
                       "type": "web_url",
-                      "title": "FACEBOOK PAGE",
+                      "title": "Facebook của page",
                       "url": "https://www.facebook.com/Robert-104556582086483",
                       "webview_height_ratio": "full"
                   },
                   {
                       "type": "postback",
-                      "title": "Khởi động lại bot",
+                      "title": "Chào lại",
                       "payload": "RESTART_BOT",   
                   }
               ]
