@@ -269,7 +269,7 @@ let handleSendMainproduct = (sender_psid) => {
         }
     })
 }
-let handleSendTopRateProduct = () =>{
+let handleSendTopRateProduct = (sender_psid) =>{
   return new Promise(async(resolve, reject)=>{
     try{
         let response2 = getTopRateTemplate();
@@ -281,7 +281,7 @@ let handleSendTopRateProduct = () =>{
         }
     })
 }
-let handleSendTopSaleProduct = () =>{
+let handleSendTopSaleProduct = (sender_psid) =>{
   return new Promise(async(resolve, reject)=>{
     try{
         let response2 = getTopSaleTemplate();
