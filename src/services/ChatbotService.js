@@ -96,18 +96,18 @@ let getMainMenuTemplate = () =>{
           "buttons": [
             {
               "type": "postback",
-              "title": "SẢN PHẨM BÁN CHẠY NHẤT NGÀY",
-              "payload": "DAY_PRODUCT",
+              "title": "TOP SALE",
+              "payload": "TOP_SALE_PRODUCT",
             },
             {
               "type": "postback",
-              "title": "SẢN PHẨM BÁN CHẠY NHẤT TUẦN",
-              "payload": "WEEK_PRODUCT",
+              "title": "TOP RATE",
+              "payload": "TOP_RATE_PRODUCT",
             },
             {
               "type": "postback",
-              "title": "SẢN PHẨM BÁN CHẠY NHẤT THÁNG",
-              "payload": "MONTH_PRODUCT",
+              "title": "SẢN PHẨM ĐƯỢC YÊU THÍCH",
+              "payload": "TOP_LIKE_PRODUCT",
             },
           ],
           },
